@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path // .tool_response.filePath // empty' | { read -r f; case \"$f\" in */PlayPulse/PLAN.md) \"/Users/coreylaverdiere/Documents/Claude/PlayPulse/scripts/plan-to-pdf.sh\" ;; esac; } 2>/dev/null || true",
+            "async": true,
+            "statusMessage": "Rendering PLAN.pdf"
+          }
+        ]
+      }
+    ]
+  }
+}

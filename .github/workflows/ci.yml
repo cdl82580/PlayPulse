@@ -1,0 +1,53 @@
+name: CI
+
+# Required merge gates for PlayPulse. Branch protection on `main` requires the
+# `quality` job below to pass before a PR can merge.
+on:
+  pull_request:
+    branches: [main, dev]
+  push:
+    branches: [main, dev]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: quality
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate Prisma client
+        run: npx prisma generate
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Format check
+        run: npm run format:check
+
+      - name: Test
+        run: npm run test
+
+      - name: Build
+        run: npm run build
+        env:
+          # Dummy values so module-load env validation never blocks the build.
+          # No live connection is made during build.
+          DATABASE_URL: postgresql://user:pass@localhost:5432/playpulse
+          DIRECT_URL: postgresql://user:pass@localhost:5432/playpulse
+          REDIS_URL: rediss://default:pass@localhost:6379
+          NEXT_PUBLIC_APP_URL: http://localhost:3000

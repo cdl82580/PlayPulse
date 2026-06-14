@@ -1,0 +1,25 @@
+// PlayPulse — Prisma schema
+// The full core data model (Organization, Season, Competition, Division,
+// Club, Team, Player, …) lands in BUILD-STEPS step 8. This file currently
+// defines the datasource/generator wiring plus a tiny HealthCheck model so
+// the first migration has something to create and the connection is testable.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  // Pooled connection (Neon pooler / PgBouncer) — used at runtime.
+  url      = env("DATABASE_URL")
+  // Direct connection — used by `prisma migrate` (no pooler).
+  directUrl = env("DIRECT_URL")
+}
+
+/// Trivial table used to verify connectivity and migrations end to end.
+/// Safe to remove once the real domain models exist.
+model HealthCheck {
+  id        String   @id @default(cuid())
+  note      String   @default("ok")
+  createdAt DateTime @default(now())
+}

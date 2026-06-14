@@ -1,0 +1,94 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------ *
+ * PlayPulse brand tokens — sourced from Brand-Kit/.../README.md
+ * Gradient is reserved for the mark, primary actions, and accents.
+ * Neutrals carry layout and body text.
+ * ------------------------------------------------------------------ */
+:root {
+  /* Primary brand gradient stops */
+  --brand-purple: #7b2dff;
+  --brand-pink: #ff2d72;
+  --brand-orange: #ff8a00;
+  --brand-gold: #ffc700;
+
+  /* Secondary / semantic accents */
+  --brand-indigo: #2a1b4d;
+  --brand-blue: #2563eb;
+  --brand-green: #00cb96;
+  --brand-amber: #ffb703;
+  --brand-mist: #f1f5f9;
+
+  /* Neutrals — darkest to lightest */
+  --ink: #0b0d17;
+  --slate-900: #131722;
+  --slate-800: #1e2433;
+  --slate-600: #4b5563;
+  --slate-400: #9ca3af;
+  --slate-200: #e5e7eb;
+  --white: #ffffff;
+
+  /* The canonical 4-stop brand gradient */
+  --brand-gradient: linear-gradient(
+    90deg,
+    var(--brand-purple),
+    var(--brand-pink),
+    var(--brand-orange),
+    var(--brand-gold)
+  );
+
+  /* App surface defaults (dark-first, matching the brand sheet) */
+  --background: var(--ink);
+  --foreground: var(--white);
+  --muted: var(--slate-400);
+  --border: #212a3d;
+}
+
+/* Map brand tokens into Tailwind's theme so utilities are generated:
+   bg-ink, text-muted, bg-brand-purple, border-line, font-sans, etc. */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-line: var(--border);
+
+  --color-brand-purple: var(--brand-purple);
+  --color-brand-pink: var(--brand-pink);
+  --color-brand-orange: var(--brand-orange);
+  --color-brand-gold: var(--brand-gold);
+
+  --color-brand-indigo: var(--brand-indigo);
+  --color-brand-blue: var(--brand-blue);
+  --color-brand-green: var(--brand-green);
+  --color-brand-amber: var(--brand-amber);
+  --color-brand-mist: var(--brand-mist);
+
+  --color-ink: var(--ink);
+  --color-slate-900: var(--slate-900);
+  --color-slate-800: var(--slate-800);
+  --color-slate-600: var(--slate-600);
+  --color-slate-400: var(--slate-400);
+  --color-slate-200: var(--slate-200);
+
+  --font-sans: var(--font-sora), system-ui, sans-serif;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+/* Reusable gradient helpers */
+.bg-brand-gradient {
+  background-image: var(--brand-gradient);
+}
+.text-brand-gradient {
+  background-image: var(--brand-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.border-brand-gradient {
+  border-image: var(--brand-gradient) 1;
+}

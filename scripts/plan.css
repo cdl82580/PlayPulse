@@ -1,0 +1,113 @@
+@page {
+  margin: 18mm 16mm;
+  size: letter;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: -apple-system, "Helvetica Neue", Arial, sans-serif;
+  font-size: 10.5pt;
+  line-height: 1.55;
+  color: #1e2433;
+  max-width: 100%;
+  margin: 0;
+}
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 700;
+  line-height: 1.2;
+  color: #2a1b4d;
+}
+h1 {
+  font-size: 24pt;
+  margin: 0 0 4pt;
+  background: linear-gradient(90deg, #7b2dff, #ff2d72, #ff8a00, #ffc700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+h2 {
+  font-size: 15pt;
+  margin: 22pt 0 6pt;
+  padding-bottom: 4pt;
+  border-bottom: 2px solid;
+  border-image: linear-gradient(90deg, #7b2dff, #ff2d72, #ff8a00, #ffc700) 1;
+  page-break-after: avoid;
+}
+h3 {
+  font-size: 12pt;
+  margin: 14pt 0 4pt;
+  color: #534ab7;
+  page-break-after: avoid;
+}
+p,
+li {
+  color: #1e2433;
+}
+a {
+  color: #7b2dff;
+  text-decoration: none;
+}
+code {
+  font-family: "SF Mono", ui-monospace, Menlo, monospace;
+  font-size: 9pt;
+  background: #f1f5f9;
+  color: #2a1b4d;
+  padding: 1px 4px;
+  border-radius: 4px;
+}
+pre {
+  background: #0b0d17;
+  color: #e5e7eb;
+  padding: 10pt 12pt;
+  border-radius: 8px;
+  font-size: 8.5pt;
+  line-height: 1.45;
+  overflow-x: auto;
+  page-break-inside: avoid;
+}
+pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+}
+blockquote {
+  margin: 8pt 0;
+  padding: 6pt 12pt;
+  border-left: 3px solid #ff2d72;
+  background: #fbeaf0;
+  color: #4b1528;
+  border-radius: 0 6px 6px 0;
+}
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 8pt 0;
+  font-size: 9.5pt;
+  page-break-inside: avoid;
+}
+th {
+  background: #2a1b4d;
+  color: #fff;
+  text-align: left;
+  padding: 5pt 8pt;
+  font-weight: 600;
+}
+td {
+  padding: 5pt 8pt;
+  border-bottom: 0.5px solid #e5e7eb;
+  vertical-align: top;
+}
+tr:nth-child(even) td {
+  background: #f8f7fc;
+}
+hr {
+  border: none;
+  border-top: 0.5px solid #e5e7eb;
+  margin: 16pt 0;
+}
+strong {
+  color: #2a1b4d;
+}
