@@ -28,10 +28,22 @@ jobs:
           node-version: 20
           cache: npm
 
+      - name: Check for database secret
+        id: guard
+        run: |
+          if [ -n "${{ secrets.DATABASE_URL }}" ]; then
+            echo "ready=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::No DATABASE_URL secret for this environment yet — skipping migrations. See docs/SETUP.md step 6."
+          fi
+
       - name: Install dependencies
+        if: steps.guard.outputs.ready == 'true'
         run: npm ci
 
       - name: Apply migrations
+        if: steps.guard.outputs.ready == 'true'
         run: npx prisma migrate deploy
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
