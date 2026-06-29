@@ -1,18 +1,10 @@
-// PlayPulse — Prisma schema
-// The full core data model (Organization, Season, Competition, Division,
-// Club, Team, Player, …) lands in BUILD-STEPS step 8. This file currently
-// defines the datasource/generator wiring plus a tiny HealthCheck model so
-// the first migration has something to create and the connection is testable.
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
-  // Pooled connection (Neon pooler / PgBouncer) — used at runtime.
-  url      = env("DATABASE_URL")
-  // Direct connection — used by `prisma migrate` (no pooler).
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }
 
@@ -22,4 +14,65 @@ model HealthCheck {
   id        String   @id @default(cuid())
   note      String   @default("ok")
   createdAt DateTime @default(now())
+}
+
+// ---------------------------------------------------------------------------
+// Auth.js (NextAuth v5) models — matches @auth/prisma-adapter expectations.
+// ---------------------------------------------------------------------------
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String    @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?
+
+  accounts Account[]
+  sessions Session[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@unique([identifier, token])
 }
