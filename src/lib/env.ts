@@ -20,6 +20,17 @@ const schema = z.object({
 
   // Public base URL of the deployed app (per environment).
   NEXT_PUBLIC_APP_URL: z.string().url().default("http://localhost:3000"),
+
+  // Resend — transactional email.
+  RESEND_API_KEY: z.string().min(1).optional(),
+  RESEND_FROM_EMAIL: z
+    .string()
+    .default("PlayPulse <playpulse@cdlav.us>"),
+
+  // Auth.js (NextAuth v5)
+  AUTH_SECRET: z.string().min(1),
+  AUTH_GOOGLE_ID: z.string().min(1).optional(),
+  AUTH_GOOGLE_SECRET: z.string().min(1).optional(),
 });
 
 const parsed = schema.safeParse(process.env);

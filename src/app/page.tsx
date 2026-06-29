@@ -22,7 +22,7 @@ export default function Home() {
       <div className="mt-10 flex flex-col gap-4 sm:flex-row">
         <a
           className="bg-brand-gradient flex h-12 items-center justify-center rounded-full px-7 font-semibold text-white transition-opacity hover:opacity-90"
-          href="#"
+          href="/signup"
         >
           Get started
         </a>
