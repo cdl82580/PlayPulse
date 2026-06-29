@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
+import Link from "next/link";
 import { signup, loginWithGoogle } from "@/app/actions/auth";
 
 export function SignupForm() {
@@ -84,9 +85,9 @@ export function SignupForm() {
 
       <p className="text-muted mt-6 text-center text-sm">
         Already have an account?{" "}
-        <a href="/login" className="text-brand-purple font-medium hover:underline">
+        <Link href="/login" className="text-brand-purple font-medium hover:underline">
           Log in
-        </a>
+        </Link>
       </p>
     </>
   );

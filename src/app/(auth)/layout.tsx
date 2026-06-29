@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function AuthLayout({
   children,
@@ -7,7 +8,7 @@ export default function AuthLayout({
 }) {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center px-4 py-12">
-      <a href="/" className="mb-10">
+      <Link href="/" className="mb-10">
         <Image
           src="/brand/logo-horizontal-dark.svg"
           alt="PlayPulse"
@@ -16,7 +17,7 @@ export default function AuthLayout({
           priority
           className="h-auto w-[200px] sm:w-[240px]"
         />
-      </a>
+      </Link>
       <div className="bg-slate-900 border-line w-full max-w-md rounded-2xl border p-8">
         {children}
       </div>

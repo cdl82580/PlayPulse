@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -20,12 +21,12 @@ export default function Home() {
         kickoff to trophy.
       </p>
       <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-        <a
+        <Link
           className="bg-brand-gradient flex h-12 items-center justify-center rounded-full px-7 font-semibold text-white transition-opacity hover:opacity-90"
           href="/signup"
         >
           Get started
-        </a>
+        </Link>
         <a
           className="border-line text-foreground flex h-12 items-center justify-center rounded-full border px-7 font-medium transition-colors hover:bg-slate-800"
           href="#"
