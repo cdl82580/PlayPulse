@@ -5,7 +5,10 @@ import Link from "next/link";
 import { loginWithCredentials, loginWithGoogle } from "@/app/actions/auth";
 
 export function LoginForm() {
-  const [state, action, pending] = useActionState(loginWithCredentials, undefined);
+  const [state, action, pending] = useActionState(
+    loginWithCredentials,
+    undefined,
+  );
 
   return (
     <>
@@ -38,7 +41,7 @@ export function LoginForm() {
             type="email"
             required
             autoComplete="email"
-            className="border-line bg-slate-800 mt-1 block h-11 w-full rounded-lg border px-3 text-sm outline-none focus:border-brand-purple"
+            className="border-line focus:border-brand-purple mt-1 block h-11 w-full rounded-lg border bg-slate-800 px-3 text-sm outline-none"
           />
         </div>
         <div>
@@ -51,13 +54,11 @@ export function LoginForm() {
             type="password"
             required
             autoComplete="current-password"
-            className="border-line bg-slate-800 mt-1 block h-11 w-full rounded-lg border px-3 text-sm outline-none focus:border-brand-purple"
+            className="border-line focus:border-brand-purple mt-1 block h-11 w-full rounded-lg border bg-slate-800 px-3 text-sm outline-none"
           />
         </div>
 
-        {state?.error && (
-          <p className="text-sm text-red-400">{state.error}</p>
-        )}
+        {state?.error && <p className="text-sm text-red-400">{state.error}</p>}
 
         <button
           type="submit"
@@ -70,7 +71,10 @@ export function LoginForm() {
 
       <p className="text-muted mt-6 text-center text-sm">
         Don&apos;t have an account?{" "}
-        <Link href="/signup" className="text-brand-purple font-medium hover:underline">
+        <Link
+          href="/signup"
+          className="text-brand-purple font-medium hover:underline"
+        >
           Sign up
         </Link>
       </p>

@@ -18,7 +18,7 @@ export default function AuthLayout({
           className="h-auto w-[200px] sm:w-[240px]"
         />
       </Link>
-      <div className="bg-slate-900 border-line w-full max-w-md rounded-2xl border p-8">
+      <div className="border-line w-full max-w-md rounded-2xl border bg-slate-900 p-8">
         {children}
       </div>
     </main>

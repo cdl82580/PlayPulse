@@ -11,7 +11,9 @@ export default async function DashboardPage() {
       <h1 className="text-3xl font-bold">
         Welcome, {session.user.name ?? session.user.email}
       </h1>
-      <p className="text-muted mt-3">You&apos;re logged in. Dashboard coming soon.</p>
+      <p className="text-muted mt-3">
+        You&apos;re logged in. Dashboard coming soon.
+      </p>
       <form action={logout} className="mt-8">
         <button
           type="submit"

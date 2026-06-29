@@ -38,7 +38,7 @@ export function SignupForm() {
             type="text"
             required
             autoComplete="name"
-            className="border-line bg-slate-800 mt-1 block h-11 w-full rounded-lg border px-3 text-sm outline-none focus:border-brand-purple"
+            className="border-line focus:border-brand-purple mt-1 block h-11 w-full rounded-lg border bg-slate-800 px-3 text-sm outline-none"
           />
         </div>
         <div>
@@ -51,7 +51,7 @@ export function SignupForm() {
             type="email"
             required
             autoComplete="email"
-            className="border-line bg-slate-800 mt-1 block h-11 w-full rounded-lg border px-3 text-sm outline-none focus:border-brand-purple"
+            className="border-line focus:border-brand-purple mt-1 block h-11 w-full rounded-lg border bg-slate-800 px-3 text-sm outline-none"
           />
         </div>
         <div>
@@ -65,14 +65,12 @@ export function SignupForm() {
             required
             minLength={8}
             autoComplete="new-password"
-            className="border-line bg-slate-800 mt-1 block h-11 w-full rounded-lg border px-3 text-sm outline-none focus:border-brand-purple"
+            className="border-line focus:border-brand-purple mt-1 block h-11 w-full rounded-lg border bg-slate-800 px-3 text-sm outline-none"
           />
           <p className="text-muted mt-1 text-xs">At least 8 characters</p>
         </div>
 
-        {state?.error && (
-          <p className="text-sm text-red-400">{state.error}</p>
-        )}
+        {state?.error && <p className="text-sm text-red-400">{state.error}</p>}
 
         <button
           type="submit"
@@ -85,7 +83,10 @@ export function SignupForm() {
 
       <p className="text-muted mt-6 text-center text-sm">
         Already have an account?{" "}
-        <Link href="/login" className="text-brand-purple font-medium hover:underline">
+        <Link
+          href="/login"
+          className="text-brand-purple font-medium hover:underline"
+        >
           Log in
         </Link>
       </p>

@@ -23,9 +23,7 @@ const schema = z.object({
 
   // Resend — transactional email.
   RESEND_API_KEY: z.string().min(1).optional(),
-  RESEND_FROM_EMAIL: z
-    .string()
-    .default("PlayPulse <playpulse@cdlav.us>"),
+  RESEND_FROM_EMAIL: z.string().default("PlayPulse <playpulse@cdlav.us>"),
 
   // Auth.js (NextAuth v5)
   AUTH_SECRET: z.string().min(1),
