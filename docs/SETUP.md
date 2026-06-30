@@ -46,7 +46,7 @@ environment:
 | `DATABASE_URL`        | Neon `dev` pooled         | Neon `main` pooled   |
 | `DIRECT_URL`          | Neon `dev` direct         | Neon `main` direct   |
 | `REDIS_URL`           | Upstash `playpulse-dev`   | Upstash `playpulse-prod` |
-| `NEXT_PUBLIC_APP_URL` | the dev/preview URL       | the production URL   |
+| `NEXT_PUBLIC_APP_URL` | the dev/preview URL       | `https://playpulse.cdlav.us` |
 
 ## 6. Deploy pipeline (Vercel + migrations)
 
