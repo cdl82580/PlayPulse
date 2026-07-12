@@ -28,8 +28,9 @@ model User {
   image         String?
   password      String?
 
-  accounts Account[]
-  sessions Session[]
+  accounts    Account[]
+  sessions    Session[]
+  memberships Membership[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -75,4 +76,49 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+// ---------------------------------------------------------------------------
+// Organizations & RBAC — the tenant boundary everything else (clubs, teams,
+// schedules, ...) is scoped to. See BUILD-STEPS.md #12.
+// ---------------------------------------------------------------------------
+
+enum OrgType {
+  LEAGUE_OPERATOR
+  CLUB
+  TOURNAMENT_HOST
+}
+
+enum MembershipRole {
+  OWNER
+  ADMIN
+  COACH
+  SCOREKEEPER
+  PARENT
+  PLAYER
+}
+
+model Organization {
+  id        String   @id @default(cuid())
+  name      String
+  slug      String   @unique
+  orgType   OrgType  @default(CLUB)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  memberships Membership[]
+}
+
+model Membership {
+  id             String         @id @default(cuid())
+  userId         String
+  organizationId String
+  role           MembershipRole
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organization Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, organizationId])
 }
