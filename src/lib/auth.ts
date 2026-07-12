@@ -12,7 +12,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     signIn: "/login",
   },
   providers: [
-    Google,
+    Google({
+      // Google verifies email ownership, so it's safe to link a Google
+      // sign-in to an existing account with the same email (e.g. one
+      // created via email/password) instead of erroring.
+      allowDangerousEmailAccountLinking: true,
+    }),
     Credentials({
       credentials: {
         email: { label: "Email", type: "email" },
