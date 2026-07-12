@@ -32,9 +32,11 @@ Legend: ✅ done in repo · ☐ you do it in a dashboard.
 ✅ `ioredis` installed; `src/lib/redis.ts` (lazy client + `createSubscriber()`);
 `src/lib/env.ts` validates all env vars at boot; `.env.example` template.
 
-☐ **Upstash:** create two Redis databases — `playpulse-dev` and
-`playpulse-prod` — and copy each `rediss://` URL into `REDIS_URL` for the
-matching environment.
+✅ **Upstash:** one Redis database (`integral-tick-...`), shared by dev and
+production — free tier caps at a single database. Redis here is cache +
+pub/sub only (Postgres is the source of truth), so a shared instance is low
+risk; split it into two databases later (paid, usage-based) if dev traffic
+ever noticeably evicts prod's cache or crosses pub/sub channels.
 
 ☐ **Local:** real values live in `.env` (gitignored). Never commit secrets.
 
@@ -45,7 +47,7 @@ environment:
 | --------------------- | ------------------------- | -------------------- |
 | `DATABASE_URL`        | Neon `dev` pooled         | Neon `main` pooled   |
 | `DIRECT_URL`          | Neon `dev` direct         | Neon `main` direct   |
-| `REDIS_URL`           | Upstash `playpulse-dev`   | Upstash `playpulse-prod` |
+| `REDIS_URL`           | Upstash (shared)          | Upstash (shared, same value) |
 | `NEXT_PUBLIC_APP_URL` | the dev/preview URL       | `https://playpulse.cdlav.us` |
 
 ## 6. Deploy pipeline (Vercel + migrations)
